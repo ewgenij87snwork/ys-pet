@@ -1,0 +1,24 @@
+<div class="form-input">
+  <label>
+    <p class="form-input__label" *ngIf="label">
+      {{ label }}
+    </p>
+    <div class="form-input__wrapper">
+      <input
+        class="form-input__input"
+        type="text"
+        [placeholder]="placeholder"
+        [formControl]="inputFormControl"
+        [ngClass]="{ error: showError && inputFormControl.invalid}"
+        (keyup.enter)="pressedEnter.emit()"
+        (change)="changeValue($event)"
+      />
+      <div
+        *ngIf="showError"
+        class="error"
+      >
+        <p class="error-msg">{{ errorMessage }}</p>
+      </div>
+    </div>
+  </label>
+</div>
