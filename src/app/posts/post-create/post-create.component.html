@@ -1,23 +1,31 @@
-<form class="form" [formGroup]="postCreateForm">
-  <app-form-input
-  class="form-control"
-  [value]="getControl('title').value"
-  [showError]="showError && !!getControl('title').errors"
-  [errorMessage]="'Invalid Title'"
-  [inputFormControl]="getControl('title')"
-  (pressedEnter)="onSubmit()"
-  ></app-form-input>
-  <app-form-input
-  class="form-control"
-  [value]="getControl('subtitle').value"
-  [showError]="showError && !!getControl('subtitle').errors"
-  [errorMessage]="'Invalid Subtitle'"
-  [inputFormControl]="getControl('subtitle')"
-  (pressedEnter)="onSubmit()"
-  ></app-form-input>
-  <div class="textarea">
-    <textarea [formControl]="getControl('text')"></textarea>
-    <p *ngIf="showError && !!getControl('text').errors">Text required</p>
-  </div>
-  <button class="btn" (click)="onSubmit()">Add Post</button>
-</form>
+<app-page-title title="Create Post"></app-page-title>
+<div class="container d-flex justify-content-center">
+  <form class="form w-50" [formGroup]="postCreateForm">
+    <app-form-input
+      class="form-control"
+      [value]="getControl('title').value"
+      [label]="'Title:'"
+      [showError]="showError && !!getControl('title').errors"
+      [errorMessage]="'Invalid Title'"
+      [inputFormControl]="getControl('title')"
+      (pressedEnter)="onSubmit()"
+    ></app-form-input>
+    <app-form-input
+      class="form-control"
+      [value]="getControl('subtitle').value"
+      [label]="'Subtitle:'"
+      [showError]="showError && !!getControl('subtitle').errors"
+      [errorMessage]="'Invalid Subtitle'"
+      [inputFormControl]="getControl('subtitle')"
+      (pressedEnter)="onSubmit()"
+    ></app-form-input>
+    <div class="form-control mb-3">
+      <label>Text:</label>
+      <textarea class="w-100 " rows="3" [formControl]="getControl('text')"></textarea>
+      <p *ngIf="showError && !!getControl('text').errors">Text required</p>
+    </div>
+    <div class="text-center">
+    <button class="btn btn-light w-75" (click)="onSubmit()">Add Post</button>
+    </div>
+  </form>
+</div>

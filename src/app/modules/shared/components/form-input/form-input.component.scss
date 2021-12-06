@@ -1,0 +1,10 @@
+.form-input {
+
+  &__wrapper {
+    position: relative;
+  }
+  &__input {
+    width: 100%;
+    border: teal 5px solid;
+  }
+}

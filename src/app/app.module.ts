@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { PostsModule } from './posts/posts.module';
 import { HeaderComponent } from './modules/shared/components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
     declarations: [AppComponent, HeaderComponent],
-    imports: [BrowserModule, AppRoutingModule, PostsModule, BrowserAnimationsModule],
+    imports: [BrowserModule, AppRoutingModule, PostsModule, BrowserAnimationsModule, MatToolbarModule],
     providers: [],
     bootstrap: [AppComponent],
 })

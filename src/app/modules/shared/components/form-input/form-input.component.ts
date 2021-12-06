@@ -25,8 +25,8 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
 })
 export class FormInputComponent implements ControlValueAccessor, OnInit {
     @Input() value = '';
-    @Input() readonly label = '';
-    @Input() readonly placeholder = '';
+    @Input() label = '';
+    @Input() placeholder = '';
     @Input() showError = false;
     @Input() inputFormControl: FormControl = new FormControl(this.value);
     @Input() errorMessage: any = null;
