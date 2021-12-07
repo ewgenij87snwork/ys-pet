@@ -1,20 +1,12 @@
 <div class="mb-3">
-  <label class="form-label" *ngIf="label">
-    {{ label }}
-  </label>
-    <input
-      class="form-control"
-      type="text"
-      [placeholder]="placeholder"
-      [formControl]="inputFormControl"
-      [ngClass]="{ error: showError && inputFormControl.invalid}"
-      (keyup.enter)="pressedEnter.emit()"
-      (change)="changeValue($event)"
-    />
-    <div
-      *ngIf="showError"
-      class="invalid-feedback"
-    >
-      <p class="error-msg">{{ errorMessage }}</p>
-    </div>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Email</mat-label>
+    <input type="text" matInput [formControl]="inputFormControl" [errorStateMatcher]="matcher"
+           [placeholder]="placeholder">
+    <mat-hint>Errors appear instantly!</mat-hint>
+      <mat-error *ngFor="let error of errors  | keyvalue">
+        <span *ngIf="(error.key === 'required')">Input is <strong>required</strong><br></span>
+        <span *ngIf="(error.key === 'maxlength')">You have reached your maximum limit of characters allowed<br></span>
+      </mat-error>
+  </mat-form-field>
 </div>
