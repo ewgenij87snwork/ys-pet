@@ -1,12 +1,11 @@
-<div class="mb-3">
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Email</mat-label>
-    <input type="text" matInput [formControl]="inputFormControl" [errorStateMatcher]="matcher"
+  <mat-form-field class="example-full-width mb-3 w-100" appearance="fill">
+    <mat-label>{{ label }}</mat-label>
+      <input *ngIf="type === 'input'" type="text" matInput [formControl]="inputFormControl" [errorStateMatcher]="matcher"
            [placeholder]="placeholder">
-    <mat-hint>Errors appear instantly!</mat-hint>
+      <textarea *ngIf="type === 'textarea'" matInput [formControl]="inputFormControl" [errorStateMatcher]="matcher"
+              [placeholder]="placeholder" [rows]="10"></textarea>
       <mat-error *ngFor="let error of errors  | keyvalue">
         <span *ngIf="(error.key === 'required')">Input is <strong>required</strong><br></span>
         <span *ngIf="(error.key === 'maxlength')">You have reached your maximum limit of characters allowed<br></span>
       </mat-error>
   </mat-form-field>
-</div>
