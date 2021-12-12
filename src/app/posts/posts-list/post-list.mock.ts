@@ -2,6 +2,7 @@ import { Post } from '../../modules/shared/shared/interfaces/post.interface';
 
 export const POSTS_LIST: Post[] = [
     {
+        id: 1,
         title: 'Lorem ipsum dolor sit amet. Illum, quaerat.',
         subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.',
         text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.',
@@ -11,6 +12,7 @@ export const POSTS_LIST: Post[] = [
         date: '28 Nov, 2021',
     },
     {
+        id: 2,
         title: 'Lorem ipsum dolor sit amet. Illum, quaerat.',
         subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.',
         text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.',
@@ -20,6 +22,7 @@ export const POSTS_LIST: Post[] = [
         date: '28 Nov, 2021',
     },
     {
+        id: 3,
         title: 'Lorem ipsum dolor sit amet. Illum, quaerat.',
         subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.',
         text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.',
@@ -29,6 +32,7 @@ export const POSTS_LIST: Post[] = [
         date: '28 Nov, 2021',
     },
     {
+        id: 4,
         title: 'Lorem ipsum dolor sit amet. Illum, quaerat.',
         subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.',
         text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.',
@@ -38,6 +42,7 @@ export const POSTS_LIST: Post[] = [
         date: '28 Nov, 2021',
     },
     {
+        id: 5,
         title: 'Lorem ipsum dolor sit amet. Illum, quaerat.',
         subtitle: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.',
         text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.',

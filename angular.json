@@ -22,7 +22,8 @@
           "options": {
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/assets/styles"
+                "src/assets/styles",
+                "src/styles/"
               ]
             },
             "outputPath": "dist/ys-pet",
