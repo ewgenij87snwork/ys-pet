@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormInputModule } from '../components/form-input/form-input.module';
 import { PageTitleModule } from '../components/page-title/page-title.module';
+import { MaterialModule } from './material/material.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
-const MODULES = [FormInputModule, PageTitleModule];
+const MODULES = [ReactiveFormsModule, PageTitleModule, MaterialModule];
 
 @NgModule({
     declarations: [],

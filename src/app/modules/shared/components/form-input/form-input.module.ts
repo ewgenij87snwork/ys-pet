@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormInputComponent } from './form-input.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { MaterialModule } from '../../shared/material/material.module';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
     declarations: [FormInputComponent],
-    imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule],
+    imports: [CommonModule, MaterialModule, SharedModule],
     exports: [FormInputComponent],
 })
 export class FormInputModule {}
