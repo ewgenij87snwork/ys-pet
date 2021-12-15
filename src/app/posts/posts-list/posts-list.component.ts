@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Post } from '../../modules/shared/shared/interfaces/post.interface';
 import { PostHttpService } from '../../services/post-http.service';
-import { POSTS_LIST } from './post-list.mock';
 
 @Component({
   selector: 'app-posts-list',
@@ -9,20 +8,24 @@ import { POSTS_LIST } from './post-list.mock';
   styleUrls: ['./posts-list.component.scss'],
 })
 export class PostsListComponent implements OnInit {
-  public posts: Post[] = POSTS_LIST;
+  public posts: Post[] | null = null;
   private liked = false;
 
   constructor(private _postHttpService: PostHttpService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._postHttpService.getError().subscribe();
+
+    this._postHttpService.getPosts().subscribe(res => {
+      this.posts = res;
+    });
+  }
 
   public like() {}
 
   updateLikes(postId: number): void {
     this.liked = !this.liked;
 
-    this._postHttpService.updateLikes(postId, this.liked).subscribe(res => {
-      console.log(this.liked);
-    });
+    this._postHttpService.updateLikes(postId, this.liked).subscribe(res => {});
   }
 }

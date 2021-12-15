@@ -1,6 +1,6 @@
 <app-page-title title="Posts List"></app-page-title>
 
-<div class="container post-item">
+<div *ngIf="posts" class="container post-item">
   <mat-card *ngFor="let post of posts" class="mb-4">
     <div class="header mb-3 d-flex justify-content-between">
       <div class="d-flex">
