@@ -1,0 +1,26 @@
+<app-page-title title="Posts List"></app-page-title>
+
+<mat-card *ngFor="let post of posts" class="mb-4">
+    <mat-card-header class="header d-flex justify-content-between">
+      <div class="d-flex">
+        <mat-icon>{{ post.avatar }}</mat-icon>
+        <p class="header__author">
+          {{ post.author }}
+        </p>
+        <p class="header__date">
+          {{ post.date }}
+        </p>
+      </div>
+      <div class="header__likes">
+        {{ post.likes }}
+      </div>
+    </mat-card-header>
+  <mat-card-title-group>
+    <mat-card-title>{{ post.title }}</mat-card-title>
+    <mat-card-subtitle>{{ post.subtitle }}</mat-card-subtitle>
+  </mat-card-title-group>
+  <mat-card-content>
+    {{ post.text }}
+    <mat-card-actions><button mat-button>Read more...</button></mat-card-actions>
+  </mat-card-content>
+</mat-card>

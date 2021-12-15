@@ -5,10 +5,19 @@ import {
     EventEmitter,
     forwardRef,
     Input,
+    OnChanges,
     OnInit,
     Output,
 } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, FormGroupDirective, NG_VALUE_ACCESSOR, NgForm } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+        const isSubmitted = form && form.submitted;
+        return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    }
+}
 
 @Component({
     selector: 'app-form-input',
@@ -23,26 +32,28 @@ import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/f
     ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormInputComponent implements ControlValueAccessor, OnInit {
+export class FormInputComponent implements ControlValueAccessor, OnInit, OnChanges {
     @Input() value = '';
-    @Input() readonly label = '';
-    @Input() readonly placeholder = '';
-    @Input() showError = false;
+    @Input() label = '';
+    @Input() placeholder = '';
     @Input() inputFormControl: FormControl = new FormControl(this.value);
-    @Input() errorMessage: any = null;
+    @Input() type: 'textarea' | 'input' = 'input';
 
     @Output() inputChange = new EventEmitter();
     @Output() pressedEnter = new EventEmitter();
 
-    private _formControl: FormControl = new FormControl(this.value);
+    public matcher = new MyErrorStateMatcher();
+    public errors = {};
 
+    private _formControl: FormControl = new FormControl(this.value);
     onChange: any = () => {};
     onTouched: any = () => {};
 
     constructor(protected changeDetectorRef: ChangeDetectorRef) {}
 
-    ngOnInit() {
-        console.log(this.showError);
+    ngOnInit() {}
+    ngOnChanges() {
+        this.errors = JSON.parse(JSON.stringify(this.inputFormControl.errors));
     }
 
     writeValue(value: string): void {
