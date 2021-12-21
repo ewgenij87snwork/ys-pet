@@ -14,8 +14,6 @@ export class PostsListComponent implements OnInit {
   constructor(private _postHttpService: PostHttpService) {}
 
   ngOnInit(): void {
-    this._postHttpService.getError().subscribe();
-
     this._postHttpService.getPosts().subscribe(res => {
       this.posts = res;
     });
@@ -26,6 +24,6 @@ export class PostsListComponent implements OnInit {
   updateLikes(postId: number): void {
     this.liked = !this.liked;
 
-    this._postHttpService.updateLikes(postId, this.liked).subscribe(res => {});
+    this._postHttpService.updateLikes(postId, this.liked).subscribe(() => {});
   }
 }

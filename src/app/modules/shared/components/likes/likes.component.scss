@@ -1,7 +1,7 @@
 @import "variables";
 
 .likes {
-  border: 2px solid $teal-color;
+  border: 2px solid $primary-color;
   border-radius: 5px;
   margin-bottom: 0;
   height: 30px;
@@ -11,13 +11,13 @@
   span {
     font-weight: bold;
     font-size: 0.85rem;
-    color: $dark-teal-text;
+    color: $primary-color;
   }
 
   mat-icon {
     display: flex;
     align-items: center;
-    color: $teal-color;
+    color: $primary-color;
     font-size: 20px;
     line-height: 20px;
   }

@@ -4,8 +4,20 @@
 
 body {
   background: $white;
-
-  p {
-    color: $darker-teal-text
-  }
 }
+
+p, a, span {
+  font: 400 15px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  line-height: 1.5;
+}
+
+p {
+  color: $darker-teal-text
+}
+
+.mat-card-subtitle {
+  line-height: 1.44;
+}
+
+@import "./../src/assets/styles/bootstrap.css";

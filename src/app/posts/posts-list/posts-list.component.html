@@ -1,7 +1,7 @@
 <app-page-title title="Posts List"></app-page-title>
 
 <div *ngIf="posts" class="container post-item">
-  <mat-card *ngFor="let post of posts" class="mb-4">
+  <mat-card *ngFor="let post of  posts" class="mb-4">
     <div class="header mb-3 d-flex justify-content-between">
       <div class="d-flex">
         <mat-icon class="header__avatar">{{ post.avatar }}</mat-icon>
@@ -20,12 +20,17 @@
       <mat-card-title class="title-group__title mb-3">{{ post.title }}</mat-card-title>
       <mat-card-subtitle class="title-group__subtitle">{{ post.subtitle }}</mat-card-subtitle>
     </mat-card-title-group>
+
     <mat-card-content class="content">
       <p class="content__text">{{ post.text }}</p>
-      <mat-card-actions class="content__btn">
-        <button mat-button>Read more...</button>
-      </mat-card-actions>
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <span class="badge bg-secondary ms-1" *ngFor="let tag of post.tags">{{ tag }}</span>
+        </div>
+        <mat-card-actions class="content__btn text-end">
+          <button mat-button>Read more...</button>
+        </mat-card-actions>
+      </div>
     </mat-card-content>
   </mat-card>
-
 </div>

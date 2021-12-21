@@ -8,7 +8,7 @@ import { Observable, of } from 'rxjs';
 export class PostHttpService {
   constructor(private _http: HttpClient) {}
 
-  public updateLikes(postId: number, like: boolean): Observable<any> {
+  public updateLikes(postId: number, like?: boolean): Observable<any> {
     return this._updateLikesRequest(postId, like);
   }
 
@@ -20,7 +20,7 @@ export class PostHttpService {
     return this._getErrorRequest();
   }
 
-  private _updateLikesRequest(postId: number, like: boolean): Observable<any> {
+  private _updateLikesRequest(postId: number, like?: boolean): Observable<any> {
     return of(1);
     // return this._http.post(`/posts/${postId}/likes`, like);
   }

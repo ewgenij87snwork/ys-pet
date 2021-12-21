@@ -11,7 +11,7 @@
 
     &__author {
       font-size: 1.05rem;
-      color: $dark-teal-text;
+      color: $primary-color;
       margin-bottom: 0;
     }
 
@@ -24,18 +24,18 @@
 
   .title-group {
     &__title {
-      color: $dark-teal-text;
+      color: $primary-color;
     }
 
     &__subtitle {
       font-size: 1.2em;
-      color: $teal-color;
+      color: $secondary-color;
     }
   }
 
   .content {
     &__btn {
-      color: $dark-teal-text;
+      color: $primary-color;
     }
   }
 }
