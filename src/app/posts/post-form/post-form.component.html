@@ -1,6 +1,6 @@
-<app-page-title title="Create Post"></app-page-title>
+<app-page-title [title]="post ? 'Edit Post' : 'Create Post'"></app-page-title>
 <div class="container d-flex justify-content-center">
-  <form class="form w-50" [formGroup]="postCreateForm">
+  <form class="form w-75" [formGroup]="postForm">
     <app-form-input
       [value]="getControl('title').value"
       [label]="'Title:'"
@@ -20,8 +20,8 @@
       [inputFormControl]="getControl('text')"
       (pressedEnter)="onSubmit()"
     ></app-form-input>
-    <div class="text-center">
-      <button mat-raised-button color="primary" class="w75" (click)="onSubmit()">Add Post</button>
+    <div class="float-end">
+      <button mat-raised-button color="primary" class="w25" (click)="onSubmit()">Save</button>
     </div>
   </form>
 </div>

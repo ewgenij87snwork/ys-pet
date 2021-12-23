@@ -7,5 +7,5 @@ export interface Post {
   avatar?: string;
   likes: number;
   date: string;
-  tags: string[];
+  tags?: string[];
 }

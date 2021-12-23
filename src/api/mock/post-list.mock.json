@@ -1,5 +1,16 @@
 [
   {
+    "id": 0,
+    "title": "Lorem Lorem Lorem ipsum dolor sit amet. Illum, quaerat.",
+    "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.",
+    "text": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.",
+    "author": "Agatha Christie",
+    "avatar": "account_box",
+    "likes": 333,
+    "date": "28 Nov, 2021",
+    "tags": ["some", "else", "tags", "article", "sunshine"]
+  },
+  {
     "id": 1,
     "title": "Lorem ipsum dolor sit amet. Illum, quaerat.",
     "subtitle": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, quaerat.",

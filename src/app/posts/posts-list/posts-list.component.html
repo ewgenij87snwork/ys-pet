@@ -28,7 +28,7 @@
           <span class="badge bg-secondary ms-1" *ngFor="let tag of post.tags">{{ tag }}</span>
         </div>
         <mat-card-actions class="content__btn text-end">
-          <button mat-button>Read more...</button>
+          <button mat-button routerLink="{{ '/posts/detail/' +  post.id}}">Read more...</button>
         </mat-card-actions>
       </div>
     </mat-card-content>
