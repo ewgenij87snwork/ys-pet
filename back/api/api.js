@@ -14,6 +14,7 @@ router.get('/posts', async (req, res, next) => {
 router.get('/error', (req, res, next) => {
   try {
     // For generate error:
+    // noinspection CommaExpressionJS
     const saveData = [][(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)].map(i => {
       console.log(i);
       saveData.push(i);
