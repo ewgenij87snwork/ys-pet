@@ -1,10 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser')
-const { seedUsers } = require('./services/seeder/seeder.js')
+const { seed } = require('./services/seeder/seeder.js')
 
 mongoose.connect('mongodb://localhost:27017/ys-blog')
-  .then(() => console.log('connection successfully'))
+  .then(() => console.log('DB connection successfully'))
   .catch((err) => console.error(err));
 
 const app = express();
@@ -18,7 +18,7 @@ app.use(express.static('../front/dist/ys-pet'));
 
 app.use('/api', apiRouter);
 
-seedUsers();
+// seed();
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/dist/ys-pet/index.html');
