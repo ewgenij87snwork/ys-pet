@@ -22,7 +22,8 @@
           "options": {
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/assets/styles"
+                "src/assets/styles",
+                "src/styles/"
               ]
             },
             "outputPath": "dist/ys-pet",
@@ -49,7 +50,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kb",
+                  "maximumWarning": "900kb",
                   "maximumError": "1mb"
                 },
                 {
