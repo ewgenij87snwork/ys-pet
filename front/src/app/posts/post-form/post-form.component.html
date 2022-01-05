@@ -1,0 +1,27 @@
+<app-page-title [title]="post ? 'Edit Post' : 'Create Post'"></app-page-title>
+<div class="container d-flex justify-content-center">
+  <form class="form w-75" [formGroup]="postForm">
+    <app-form-input
+      [value]="getControl('title').value"
+      [label]="'Title:'"
+      [inputFormControl]="getControl('title')"
+      (pressedEnter)="onSubmit()"
+    ></app-form-input>
+    <app-form-input
+      [value]="getControl('subtitle').value"
+      [label]="'Subtitle:'"
+      [inputFormControl]="getControl('subtitle')"
+      (pressedEnter)="onSubmit()"
+    ></app-form-input>
+    <app-form-input
+      label="Text:"
+      type="textarea"
+      [value]="getControl('text').value"
+      [inputFormControl]="getControl('text')"
+      (pressedEnter)="onSubmit()"
+    ></app-form-input>
+    <div class="float-end">
+      <button mat-raised-button color="primary" class="w25" (click)="onSubmit()">Save</button>
+    </div>
+  </form>
+</div>

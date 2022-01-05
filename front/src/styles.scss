@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+@import "variables";
+@import "theme";
+
+html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+}
+
+body {
+  background: $white;
+}
+
+p, a, span {
+  font: 400 15px Roboto, "Helvetica Neue", sans-serif;
+  letter-spacing: normal;
+  line-height: 1.5;
+}
+
+p {
+  color: $darker-teal-text
+}
+
+.mat-card-subtitle {
+  line-height: 1.44;
+}
+
+@import "./../src/assets/styles/bootstrap.css";
