@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const PostsSchema = new Schema({
+const PostsSchema = new Schema(
+  {
     title: {
       type: String,
-      required: [true, 'Title required']
+      required: [true, 'Title required'],
     },
 
     subtitle: {
@@ -14,35 +15,35 @@ const PostsSchema = new Schema({
 
     text: {
       type: String,
-      required: [true, 'Text required']
+      required: [true, 'Text required'],
     },
 
     author: {
       type: Schema.Types.ObjectId,
       required: [true, 'Author required'],
-      rel: 'Users'
+      ref: 'Users',
     },
 
     tags: [
       {
         type: Schema.Types.ObjectId,
-        rel: 'Tags'
-      }
+        ref: 'Tags',
+      },
     ],
 
     likes: {
-      type: Number
+      type: Number,
     },
 
     updatedAt: {
-      type: Date
-    }
+      type: Date,
+    },
   },
 
   {
     timestamps: true,
-  }
-)
+  },
+);
 
 const Posts = mongoose.model('Posts', PostsSchema);
 module.exports = { Posts };
