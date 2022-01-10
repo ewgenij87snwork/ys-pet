@@ -1,12 +1,12 @@
 const faker = require('faker');
 
-const { Users } = require('../../schemas/Users.js');
-const { Posts } = require('../../schemas/Posts');
-const { Likes } = require('../../schemas/Likes');
-const { Tags } = require('../../schemas/Tags');
+const Users = require('../schemas/Users');
+const Posts = require('../schemas/Posts');
+const Likes = require('../schemas/Likes');
+const Tags = require('../schemas/Tags');
 
 seed = async () => {
-  let randomTotal = Math.ceil(Math.random() * 3);
+  let randomTotal = Math.ceil(Math.random() * 5);
   let countUsers = randomTotal;
   let countPosts = randomTotal + 2;
   let countDays = randomTotal;

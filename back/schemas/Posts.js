@@ -45,5 +45,4 @@ const PostsSchema = new Schema(
   },
 );
 
-const Posts = mongoose.model('Posts', PostsSchema);
-module.exports = { Posts };
+module.exports = mongoose.model('Posts', PostsSchema);
