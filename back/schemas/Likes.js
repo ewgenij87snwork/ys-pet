@@ -6,6 +6,7 @@ const LikesSchema = new Schema({
   post: {
     type: Schema.Types.ObjectId,
     required: [true, 'Post ID required'],
+    index: true,
     ref: 'Posts',
   },
   user: {
