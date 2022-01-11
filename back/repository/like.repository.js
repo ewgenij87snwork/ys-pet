@@ -1,5 +1,7 @@
+const { Types } = require('mongoose');
 const Likes = require('../schemas/Likes');
 const Posts = require('../schemas/Posts');
+const Users = require('../schemas/Users');
 
 class LikeRepository {
   constructor(options) {
@@ -9,35 +11,49 @@ class LikeRepository {
   }
 
   async updateLikes(options) {
-    const { postId, userId } = options;
+    return new Promise(async resolve => {
+      let { postId, userId } = options;
+      const likesSum = await this.postModel.findById(postId);
 
-    const isLiked = await this.likeModel.findOne({ post: postId, user: userId });
+      if (!userId || userId === '38457someUserId') {
+        const user = await this.userModel.findOne({ name: 'randomUser' });
+        userId = Types.ObjectId(user._id);
+      }
 
-    if (isLiked) {
-      await this.postModel.findByIdAndUpdate(postId, {
-        $inc: {
-          likes: -1,
-        },
-      });
-      await this.likeModel.deleteOne({
-        $and: [{ post: postId }, { user: userId }],
-      });
-    }
+      const isLiked = await this.likeModel.findOne({ post: postId, user: userId });
 
-    if (!isLiked) {
-      await this.postModel.findByIdAndUpdate(postId, {
-        $inc: {
-          likes: 1,
-        },
-      });
-      await new this.likeModel({ post: postId, user: userId }).save();
-    }
+      if (isLiked) {
+        await this.likeModel.deleteOne({
+          $and: [{ post: postId }, { user: userId }],
+        });
 
-    return await this.postModel.findOne({ postId }, { likes: 1, _id: 0 });
+        await this.postModel
+          .findByIdAndUpdate(postId, {
+            $set: {
+              likes: likesSum.likes - 1,
+            },
+          })
+          .then(async res => {
+            return resolve(await this.postModel.findById(postId));
+          });
+      }
+
+      if (!isLiked) {
+        await this.postModel
+          .findByIdAndUpdate(postId, {
+            likes: likesSum.likes ? likesSum.likes + 1 : 1,
+          })
+          .then(async res => {
+            await new this.likeModel({ post: postId, user: userId }).save();
+            return resolve(await this.postModel.findById(postId));
+          });
+      }
+    });
   }
 }
 
 module.exports = new LikeRepository({
   likeModel: Likes,
   postModel: Posts,
+  userModel: Users,
 });

@@ -11,6 +11,7 @@ const PostsSchema = new Schema(
 
     subtitle: {
       type: String,
+      required: [true, 'Subtitle required'],
     },
 
     text: {

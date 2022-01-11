@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 const TagsSchema = new Schema({
   title: {
     type: String,
+    required: true,
     unique: true,
     index: true,
   },

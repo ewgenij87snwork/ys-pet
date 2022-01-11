@@ -6,7 +6,7 @@ const Likes = require('../schemas/Likes');
 const Tags = require('../schemas/Tags');
 
 seed = async () => {
-  let randomTotal = Math.ceil(Math.random() * 5);
+  let randomTotal = Math.ceil(Math.random() * 3);
   let countUsers = randomTotal;
   let countPosts = randomTotal + 2;
   let countDays = randomTotal;
@@ -19,6 +19,14 @@ seed = async () => {
     await Tags.deleteMany();
 
     // Seed Users
+    let userWithConstNameObj = await new Users({
+      name: 'randomUser',
+      email: 'email',
+      password: 'password',
+    });
+
+    await userWithConstNameObj.save();
+
     while (countUsers > 0) {
       let name = `${faker.name.firstName()} ${faker.name.lastName()}`;
       let email = `${name.split(' ').join('')}@${faker.internet.domainWord()}.com`;

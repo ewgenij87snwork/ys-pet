@@ -2,8 +2,8 @@ const likesService = require('../services/likes.service');
 
 const updateLikes = async (req, res, next) => {
   const options = {
-    postId: req.query.postId,
-    userId: req.query.userId,
+    postId: req.body.postId,
+    userId: req.body.userId,
   };
 
   try {
