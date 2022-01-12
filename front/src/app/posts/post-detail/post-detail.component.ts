@@ -16,8 +16,8 @@ export class PostDetailComponent implements OnInit {
   constructor(private _postHttpService: PostHttpService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.data.pipe(pluck('post')).subscribe((post: Post) => {
-      this.post = post;
+    this.route.data.pipe(pluck('post')).subscribe((post: Post[]) => {
+      this.post = post[0];
     });
   }
 

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { PostRequest } from '../../modules/shared/interfaces/post.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +29,14 @@ export class PostHttpService {
     return this._getPostsByTagRequest(tag);
   }
 
+  public createPost(post: PostRequest): Observable<any> {
+    return this._createPostRequest(post);
+  }
+
+  public updatePost(postId: string, post: PostRequest): Observable<any> {
+    return this._updatePostRequest(postId, post);
+  }
+
   private _updateLikesRequest(postId: number, like?: boolean): Observable<any> {
     return of(1);
     // return this._http.post(`/posts/${postId}/likes`, like);
@@ -47,5 +56,13 @@ export class PostHttpService {
 
   private _getPostsByTagRequest(tag: string): Observable<any> {
     return this._http.get(`api/posts/filter/`, { params: { tag } });
+  }
+
+  private _createPostRequest(post: PostRequest): Observable<any> {
+    return this._http.post('api/posts', post);
+  }
+
+  private _updatePostRequest(postId: string, post: PostRequest): Observable<any> {
+    return this._http.patch(`api/posts/${postId}`, post);
   }
 }

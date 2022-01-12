@@ -19,10 +19,10 @@
     <span class="sidebar__avatar material-icons mb-2">{{ post.avatar || 'account_box' }}</span>
     <div>
       <p class="fs-5 font-italic">
-        <em>{{ post.author.name }}</em>
+        <em>{{ post.author }}</em>
       </p>
       <p class="fs-7 mb-4">
-        {{ post.date }}
+        {{ post.date | date: 'short' }}
       </p>
 
     </div>

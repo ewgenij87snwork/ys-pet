@@ -15,8 +15,9 @@ export class PostsListComponent implements OnInit {
   constructor(private _postHttpService: PostHttpService, private router: Router, private route: ActivatedRoute) {
     const { queryParams } = this.route.snapshot;
     const tag = queryParams['tag'];
+
     if (tag) {
-      this._postHttpService.getPostsByTag('finance').subscribe(res => {
+      this._postHttpService.getPostsByTag(tag).subscribe(res => {
         this.posts = res.entities;
       });
     }
@@ -39,6 +40,16 @@ export class PostsListComponent implements OnInit {
   }
 
   onTagClick(tag: string) {
+    const { queryParams } = this.route.snapshot;
+
+    this.router.navigate(['posts/filter'], {
+      queryParams: {
+        ...queryParams,
+        tag: tag,
+      },
+      queryParamsHandling: 'merge',
+    });
+
     this._postHttpService.getPostsByTag(tag).subscribe(res => {
       this.posts = res.entities;
     });

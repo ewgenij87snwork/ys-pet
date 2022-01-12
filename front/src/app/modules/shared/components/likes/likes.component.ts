@@ -6,7 +6,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./likes.component.scss'],
 })
 export class LikesComponent implements OnInit {
-  @Input() likes: number = 0;
+  @Input() likes: number | undefined = 0;
   @Input() editable = false;
 
   @Output() likeCallback = new EventEmitter<any>();

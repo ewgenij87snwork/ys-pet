@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { pluck } from 'rxjs';
-import { Post } from '../../modules/shared/interfaces/post.interface';
+import { Post, PostRequest } from '../../modules/shared/interfaces/post.interface';
+import { PostHttpService } from '../../services/post-http/post-http.service';
 
 @Component({
   selector: 'app-post-form',
@@ -13,13 +14,18 @@ export class PostFormComponent implements OnInit {
   public showError = false;
   public postForm: FormGroup = this.fb.group({
     title: ['', [Validators.required, Validators.maxLength(30)]],
-    subtitle: ['', [Validators.required, Validators.maxLength(30)]],
+    subtitle: ['', [Validators.required, Validators.maxLength(100)]],
     text: ['', [Validators.required]],
   });
   public errorMessage: any;
   public post: Post | null = null;
 
-  constructor(private fb: FormBuilder, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private postHttpService: PostHttpService,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.getPostFromResolver();
@@ -31,28 +37,44 @@ export class PostFormComponent implements OnInit {
 
   public onSubmit() {
     this.showError = true;
+
     if (this.postForm.valid) {
-      const body = {
+      const post: PostRequest = {
         title: this.postForm.value.title,
         subtitle: this.postForm.value.subtitle,
         text: this.postForm.value.text,
       };
 
-      this.showError = false;
+      if (!this.post) {
+        return this.postHttpService.createPost(post).subscribe(res => {
+          this.router.navigate(['posts/detail/', res[0].id]);
+          this.showError = false;
+        });
+      }
+
+      const postId = this.post.id.toString();
+
+      this.postHttpService.updatePost(postId, post).subscribe(res => {
+        this.router.navigate(['posts/detail/', res[0].id]);
+      });
     }
+    this.showError = false;
+    return;
   }
 
   private getPostFromResolver() {
-    this.activatedRoute.data.pipe(pluck('post')).subscribe((post: Post) => {
-      this.post = post;
-      if (this.post) {
-        const { title, subtitle, text } = this.post;
+    this.activatedRoute.data.pipe(pluck('post')).subscribe((post: Post[]) => {
+      if (post) {
+        this.post = post[0];
+        if (this.post) {
+          const { title, subtitle, text } = this.post;
 
-        this.postForm.setValue({
-          title: title,
-          subtitle: subtitle,
-          text: text,
-        });
+          this.postForm.setValue({
+            title: title,
+            subtitle: subtitle,
+            text: text,
+          });
+        }
       }
     });
   }
