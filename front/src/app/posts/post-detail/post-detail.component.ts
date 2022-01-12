@@ -21,8 +21,8 @@ export class PostDetailComponent implements OnInit {
     });
   }
 
-  updateLikes(postId: number): void {
-    this._postHttpService.updateLikes(postId).subscribe(() => {});
+  updateLikes(postId: string): void {
+    this._postHttpService.updateLikes(postId, '38457someUserId').subscribe(() => {});
   }
 
   public onEdit() {

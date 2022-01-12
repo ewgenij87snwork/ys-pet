@@ -19,7 +19,7 @@ export class PreloaderInterceptor implements HttpInterceptor {
               this.router.navigate(['/404']);
               break;
             default:
-              console.log(err.message);
+              console.error(err.message);
               break;
           }
         }

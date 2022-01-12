@@ -10,7 +10,6 @@ import { PostHttpService } from '../../services/post-http/post-http.service';
 })
 export class PostsListComponent implements OnInit {
   public posts: Post[] | null = null;
-  private liked = false;
 
   constructor(private _postHttpService: PostHttpService, private router: Router, private route: ActivatedRoute) {
     const { queryParams } = this.route.snapshot;
@@ -31,15 +30,7 @@ export class PostsListComponent implements OnInit {
     }
   }
 
-  public like() {}
-
-  updateLikes(postId: number): void {
-    this.liked = !this.liked;
-
-    this._postHttpService.updateLikes(postId, this.liked).subscribe(() => {});
-  }
-
-  onTagClick(tag: string) {
+  public onTagClick(tag: string) {
     const { queryParams } = this.route.snapshot;
 
     this.router.navigate(['posts/filter'], {

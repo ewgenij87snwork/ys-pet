@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { PostRequest } from '../../modules/shared/interfaces/post.interface';
 
 @Injectable({
@@ -9,8 +9,8 @@ import { PostRequest } from '../../modules/shared/interfaces/post.interface';
 export class PostHttpService {
   constructor(private _http: HttpClient) {}
 
-  public updateLikes(postId: number, like?: boolean): Observable<any> {
-    return this._updateLikesRequest(postId, like);
+  public updateLikes(postId: string, userId: string): Observable<any> {
+    return this._updateLikesRequest(postId, userId);
   }
 
   public getPosts(): Observable<any> {
@@ -37,9 +37,8 @@ export class PostHttpService {
     return this._updatePostRequest(postId, post);
   }
 
-  private _updateLikesRequest(postId: number, like?: boolean): Observable<any> {
-    return of(1);
-    // return this._http.post(`/posts/${postId}/likes`, like);
+  private _updateLikesRequest(postId: string, userId: string): Observable<any> {
+    return this._http.put('api/likes', { postId, userId });
   }
 
   private _getPostsRequest(): Observable<any> {

@@ -14,7 +14,7 @@
           </p>
         </div>
       </div>
-      <app-likes [likes]="post.likes" [editable]="true" (likeCallback)="updateLikes(post.id)"></app-likes>
+      <app-likes [likes]="post.likes" [editable]="true" [postId]="post.id"></app-likes>
     </div>
     <mat-card-title-group class="title-group d-flex justify-content-center text-center">
       <mat-card-title class="title-group__title mb-3">{{ post.title }}</mat-card-title>

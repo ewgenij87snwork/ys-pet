@@ -13,7 +13,7 @@ import { PostHttpService } from '../../services/post-http/post-http.service';
 export class PostFormComponent implements OnInit {
   public showError = false;
   public postForm: FormGroup = this.fb.group({
-    title: ['', [Validators.required, Validators.maxLength(30)]],
+    title: ['', [Validators.required, Validators.maxLength(40)]],
     subtitle: ['', [Validators.required, Validators.maxLength(100)]],
     text: ['', [Validators.required]],
   });
@@ -37,7 +37,6 @@ export class PostFormComponent implements OnInit {
 
   public onSubmit() {
     this.showError = true;
-
     if (this.postForm.valid) {
       const post: PostRequest = {
         title: this.postForm.value.title,
