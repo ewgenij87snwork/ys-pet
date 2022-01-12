@@ -16,10 +16,10 @@
     </div>
   </mat-card>
   <div class="sidebar w-25 d-flex justify-content-center flex-column text-center">
-    <span class="sidebar__avatar material-icons mb-2">{{ post.avatar }}</span>
+    <span class="sidebar__avatar material-icons mb-2">{{ post.avatar || 'account_box' }}</span>
     <div>
       <p class="fs-5 font-italic">
-        <em>{{ post.author }}</em>
+        <em>{{ post.author.name }}</em>
       </p>
       <p class="fs-7 mb-4">
         {{ post.date }}
@@ -27,7 +27,8 @@
 
     </div>
     <div class="text-center">
-      <span class="badge bg-secondary ms-1" *ngFor="let tag of post.tags">{{ tag }}</span>
+      <span class="badge bg-secondary ms-1 fw-lighter tag" *ngFor="let tag of post.tags"
+            (click)="onTagClick(tag)">{{ tag }}</span>
     </div>
     <div class="d-flex justify-content-center mt-3">
       <app-likes [likes]="post.likes" [editable]="true" (likeCallback)="updateLikes(post.id)"></app-likes>

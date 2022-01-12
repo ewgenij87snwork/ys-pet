@@ -3,7 +3,9 @@ export interface Post {
   title: string;
   subtitle: string;
   text: string;
-  author: string;
+  author: {
+    name: string;
+  };
   avatar?: string;
   likes: number;
   date: string;

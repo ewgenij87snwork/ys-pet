@@ -13,14 +13,10 @@ export class PostDetailComponent implements OnInit {
   @Input() post: Post | null = null;
   public showEdit = true;
 
-  constructor(
-    private _postHttpService: PostHttpService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute,
-  ) {}
+  constructor(private _postHttpService: PostHttpService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.pipe(pluck('post')).subscribe((post: Post) => {
+    this.route.data.pipe(pluck('post')).subscribe((post: Post) => {
       this.post = post;
     });
   }
@@ -31,5 +27,17 @@ export class PostDetailComponent implements OnInit {
 
   public onEdit() {
     this.router.navigate(['posts/edit', this.post?.id]);
+  }
+
+  onTagClick(tag: string) {
+    const { queryParams } = this.route.snapshot;
+
+    this.router.navigate(['posts/filter'], {
+      queryParams: {
+        ...queryParams,
+        tag: tag,
+      },
+      queryParamsHandling: 'merge',
+    });
   }
 }

@@ -20,6 +20,14 @@ export class PostHttpService {
     return this._getErrorRequest();
   }
 
+  public getPost(postId: string): Observable<any> {
+    return this._getPostRequest(postId);
+  }
+
+  public getPostsByTag(tag: string): Observable<any> {
+    return this._getPostsByTagRequest(tag);
+  }
+
   private _updateLikesRequest(postId: number, like?: boolean): Observable<any> {
     return of(1);
     // return this._http.post(`/posts/${postId}/likes`, like);
@@ -31,5 +39,13 @@ export class PostHttpService {
 
   private _getErrorRequest(): Observable<any> {
     return this._http.get('api/error');
+  }
+
+  private _getPostRequest(postId: string): Observable<any> {
+    return this._http.get(`api/posts/${postId}`);
+  }
+
+  private _getPostsByTagRequest(tag: string): Observable<any> {
+    return this._http.get(`api/posts/filter/`, { params: { tag } });
   }
 }

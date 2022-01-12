@@ -25,4 +25,10 @@ p {
   line-height: 1.44;
 }
 
+.tag {
+  font-size: 0.8rem;
+  font-weight: normal;
+  cursor: pointer;
+}
+
 @import "./../src/assets/styles/bootstrap.css";

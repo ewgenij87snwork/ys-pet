@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../../modules/shared/interfaces/post.interface';
 import { PostHttpService } from '../../services/post-http/post-http.service';
 
@@ -11,12 +12,22 @@ export class PostsListComponent implements OnInit {
   public posts: Post[] | null = null;
   private liked = false;
 
-  constructor(private _postHttpService: PostHttpService) {}
+  constructor(private _postHttpService: PostHttpService, private router: Router, private route: ActivatedRoute) {
+    const { queryParams } = this.route.snapshot;
+    const tag = queryParams['tag'];
+    if (tag) {
+      this._postHttpService.getPostsByTag('finance').subscribe(res => {
+        this.posts = res.entities;
+      });
+    }
+  }
 
   ngOnInit(): void {
-    this._postHttpService.getPosts().subscribe(res => {
-      this.posts = res;
-    });
+    if (!this.posts) {
+      this._postHttpService.getPosts().subscribe(res => {
+        this.posts = res.entities;
+      });
+    }
   }
 
   public like() {}
@@ -25,5 +36,11 @@ export class PostsListComponent implements OnInit {
     this.liked = !this.liked;
 
     this._postHttpService.updateLikes(postId, this.liked).subscribe(() => {});
+  }
+
+  onTagClick(tag: string) {
+    this._postHttpService.getPostsByTag(tag).subscribe(res => {
+      this.posts = res.entities;
+    });
   }
 }

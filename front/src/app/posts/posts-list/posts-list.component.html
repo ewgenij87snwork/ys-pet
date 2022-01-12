@@ -1,16 +1,16 @@
 <app-page-title title="Posts List"></app-page-title>
 
 <div *ngIf="posts" class="container post-item">
-  <mat-card *ngFor="let post of  posts" class="mb-4">
+  <mat-card *ngFor="let post of posts" class="mb-4">
     <div class="header mb-3 d-flex justify-content-between">
       <div class="d-flex">
-        <mat-icon class="header__avatar">{{ post.avatar }}</mat-icon>
+        <mat-icon class="header__avatar">{{ post.avatar || 'account_box' }}</mat-icon>
         <div>
           <p class="header__author">
             {{ post.author }}
           </p>
           <p class="header__date">
-            {{ post.date }}
+            {{ post.date | date: 'short'}}
           </p>
         </div>
       </div>
@@ -22,10 +22,11 @@
     </mat-card-title-group>
 
     <mat-card-content class="content">
-      <p class="content__text">{{ post.text }}</p>
+      <p class="content__text">{{ post.text | slice:0:500 }}</p>
       <div class="d-flex justify-content-between align-items-center">
         <div>
-          <span class="badge bg-secondary ms-1" *ngFor="let tag of post.tags">{{ tag }}</span>
+          <span class="badge bg-secondary ms-1 tag" *ngFor="let tag of post.tags"
+                (click)="onTagClick(tag)">{{ tag }}</span>
         </div>
         <mat-card-actions class="content__btn text-end">
           <button mat-button routerLink="{{ '/posts/detail/' +  post.id}}">Read more...</button>

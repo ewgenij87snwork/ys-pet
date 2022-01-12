@@ -14,6 +14,10 @@ const routes: Routes = [
         component: PostsListComponent,
       },
       {
+        path: 'filter',
+        component: PostsListComponent,
+      },
+      {
         path: 'detail/:postId',
         component: PostDetailComponent,
         resolve: {
