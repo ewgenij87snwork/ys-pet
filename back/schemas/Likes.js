@@ -6,15 +6,14 @@ const LikesSchema = new Schema({
   post: {
     type: Schema.Types.ObjectId,
     required: [true, 'Post ID required'],
-    ref: 'Posts'
+    index: true,
+    ref: 'Posts',
   },
   user: {
     type: Schema.Types.ObjectId,
     required: [true, 'User ID required'],
-    ref: 'Users'
-  }
-})
+    ref: 'Users',
+  },
+});
 
-const Likes = mongoose.model('Likes', LikesSchema);
-
-module.exports = { Likes };
+module.exports = mongoose.model('Likes', LikesSchema);

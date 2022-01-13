@@ -18,9 +18,9 @@ export class PostResolver implements Resolve<Post> {
 
     const postId = route!.paramMap!.get('postId');
 
-    return this._postHttpService.getPosts().pipe(
+    return this._postHttpService.getPost(postId!).pipe(
       map(res => {
-        return res[postId!];
+        return res;
       }),
       take(1),
       catchError(() => {
