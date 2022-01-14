@@ -1,7 +1,12 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+
 const seederService = require('./services/seeder.service.js');
+const { name: projectName } = require('./package.json');
+
+const { initLoggerWithContext } = require('./utils/logger');
+const { injectRequestId } = require('./middleware');
 
 const cookieParser = require('cookie-parser'),
   log = require('morgan'),
@@ -41,6 +46,13 @@ const cookieParser = require('cookie-parser'),
   app.use(bodyParser.urlencoded({ extended: true }));
 
   app.use(express.static('../front/dist/ys-pet'));
+
+  app.use(injectRequestId(projectName));
+
+  app.use((req, res, next) => {
+    req.logger = initLoggerWithContext({ requestId: req.requestId });
+    next();
+  });
 
   // await seederService.seed();
 

@@ -16,4 +16,6 @@ const prepareAggregateData = options => {
   };
 };
 
-module.exports = { prepareAggregateData };
+module.exports = {
+  prepareAggregateData,
+};

@@ -1,18 +1,22 @@
 const postsService = require('../services/posts.service');
 
-const getPostsList = async (req, res, next) => {
+const getPostsList = async (req, res) => {
+  const { logger, requestId } = req;
+  logger.info('[getPostsList] requested', { requestId });
+
   let options = req.query;
 
   try {
-    const result = await postsService.getPostsList(options);
+    const result = await postsService.getPostsList(options, { logger: req.logger });
 
     res.status(result.status || 200).send(result.data);
   } catch (err) {
+    logger.error('Get Posts List: error occurred', { err, requestId });
     res.status(500).send({ status: 500, error: err?.message || 'Get Posts List: error occurred' });
   }
 };
 
-const getPostById = async (req, res, next) => {
+const getPostById = async (req, res) => {
   const postId = req.params.postId;
   try {
     const result = await postsService.getPostById(postId);
@@ -23,7 +27,7 @@ const getPostById = async (req, res, next) => {
   }
 };
 
-const updatePost = async (req, res, next) => {
+const updatePost = async (req, res) => {
   const postId = req.params.postId;
   const options = req.body;
 
@@ -36,7 +40,7 @@ const updatePost = async (req, res, next) => {
   }
 };
 
-const createPost = async (req, res, next) => {
+const createPost = async (req, res) => {
   const post = req.body;
 
   try {
@@ -48,7 +52,7 @@ const createPost = async (req, res, next) => {
   }
 };
 
-const deletePost = async (req, res, next) => {
+const deletePost = async (req, res) => {
   const postId = req.query.postId;
 
   try {
@@ -60,7 +64,7 @@ const deletePost = async (req, res, next) => {
   }
 };
 
-const getPostsByTag = async (req, res, next) => {
+const getPostsByTag = async (req, res) => {
   const options = req.query;
 
   try {
