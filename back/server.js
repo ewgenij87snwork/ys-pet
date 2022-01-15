@@ -12,6 +12,7 @@ const cookieParser = require('cookie-parser'),
   log = require('morgan'),
   cors = require('cors'),
   multer = require('multer'),
+  dotEnv = require('dotenv'),
   upload = multer(),
   app = express(),
   PORT = process.env.PORT || 3000,
@@ -21,8 +22,10 @@ const cookieParser = require('cookie-parser'),
   app.set('port', PORT);
   app.set('env', NODE_ENV);
 
+  dotEnv.config();
+
   mongoose
-    .connect('mongodb://localhost:27017/ys-blog')
+    .connect(process.env.MONGO_URL)
     .then(() => console.log('DB connection successfully'))
     .catch(err => console.error(err));
 
