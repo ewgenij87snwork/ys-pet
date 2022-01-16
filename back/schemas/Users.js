@@ -26,6 +26,9 @@ const UsersSchema = new Schema({
     type: String,
     default: 'self_improvement',
   },
+  token: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model('Users', UsersSchema);
