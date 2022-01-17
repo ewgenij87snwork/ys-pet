@@ -1,19 +1,15 @@
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
-const jsonSecret = process.env.JSON_SECRET;
+const jsonSecret = process.env.JWT_KEY;
 
 const tokenDriver = {
   sign: options => {
-    console.log(jsonSecret);
-    return jsonwebtoken.sign(options, 'jsonSecret');
+    return jsonwebtoken.sign(options, '' + jsonSecret);
   },
-  verify: (token, ctx) => {
+  verify: token => {
     try {
-      const decoded = jsonwebtoken.verify(token, jsonSecret);
-      ctx.logger.info('Successfully decoded', { decoded });
-      return decoded;
+      return jsonwebtoken.verify(token, '' + jsonSecret);
     } catch (err) {
-      ctx.logger.error('Filed to verify token', err);
       throw err;
     }
   },

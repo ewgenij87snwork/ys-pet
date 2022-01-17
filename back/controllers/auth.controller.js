@@ -32,8 +32,9 @@ const logout = async (req, res) => {
 };
 
 const signup = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password } = req.body.data;
   const options = { name, email, password };
+
   try {
     const data = await authService.signup(options, { logger: req.logger });
     res.status(data.status).json(data);

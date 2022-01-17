@@ -2,7 +2,7 @@ const Likes = require('../schemas/Likes');
 const Posts = require('../schemas/Posts');
 const Users = require('../schemas/Users');
 const { getHash, compareHash } = require('../utils/bcrypt');
-const { reject } = require('bcrypt/promises');
+const { Types } = require('mongoose');
 
 class UserRepository {
   constructor(options) {
@@ -36,6 +36,10 @@ class UserRepository {
 
     return new Promise(async (resolve, reject) => {
       const user = await this.userModel.findOne({ email });
+
+      if (!user) {
+        return reject({ message: 'Email not register' });
+      }
       const comparedPass = compareHash(password, user.password);
 
       if (!comparedPass) {
@@ -58,7 +62,6 @@ class UserRepository {
           },
         )
         .then(async user => {
-          console.log(await this.userModel.findOne({ _id: userId }));
           return resolve({
             name: user.name,
             email: user.email,
@@ -72,7 +75,11 @@ class UserRepository {
   }
 
   deleteToken(userId) {
-    return new Promise(resolve => {
+    return new Promise(async (resolve, reject) => {
+      if (!Types.ObjectId.isValid(userId)) {
+        return reject({ message: 'UserId not found' });
+      }
+
       this.userModel
         .findOneAndUpdate(
           { _id: userId },
@@ -84,6 +91,25 @@ class UserRepository {
         )
         .then(_ => {
           return resolve();
+        })
+        .catch(e => {
+          return reject(e);
+        });
+    });
+  }
+
+  getUserToken(userId) {
+    return new Promise(async (resolve, reject) => {
+      const tokenExist = await this.userModel.exists({ _id: userId });
+      if (!tokenExist) {
+        return reject({ message: 'Wrong Auth token' });
+      }
+
+      this.userModel
+        .findById(userId)
+        .populate('token')
+        .then(user => {
+          return resolve(user.token);
         })
         .catch(e => {
           return reject(e);

@@ -66,10 +66,10 @@ const cookieParser = require('cookie-parser'),
   });
 
   // catch errors
-  app.use((err, req, res) => {
-    const status = err.status || 500;
-    const msg = err.error || err.message;
-    console.error(err);
+  app.use((error, req, res, next) => {
+    const status = error.status || 500;
+    const msg = error.error || error.message;
+    console.error(error);
     res.status(status).send({ status, error: msg });
   });
 

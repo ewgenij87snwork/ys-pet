@@ -11,18 +11,20 @@ const signup = async (options, ctx) => {
 };
 
 const login = async options => {
+  let token = null;
   const user = await userRepository.findByAuth(options);
 
-  const token = tokenDriver.sign({
-    _id: user.id,
-    name: user.name,
-  });
+  if (user) {
+    token = tokenDriver.sign({
+      _id: user.id,
+      name: user.name,
+    });
+  }
 
   await userRepository.saveToken(user._id, token);
-
   return {
     status: 200,
-    data: { token },
+    data: { userId: user._id.toString(), name: user.name, token },
   };
 };
 
