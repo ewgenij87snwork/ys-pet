@@ -4,8 +4,14 @@
          [placeholder]="placeholder">
   <textarea *ngIf="type === 'textarea'" matInput [formControl]="inputFormControl" [errorStateMatcher]="matcher"
             [placeholder]="placeholder" [rows]="10"></textarea>
-  <mat-error *ngFor="let error of errors  | keyvalue">
-    <span *ngIf="(error.key === 'required')">Input is <strong>required</strong><br></span>
-    <span *ngIf="(error.key === 'maxlength')">You have reached your maximum limit of characters allowed<br></span>
-  </mat-error>
+  <div *ngIf="showError && inputFormControl.invalid">
+    <mat-error *ngFor="let error of errors  | keyvalue">
+      <span *ngIf="(error.key === 'required')">Input is <strong>required</strong><br></span>
+      <span *ngIf="(error.key === 'maxlength')">You have reached your maximum limit of characters allowed<br></span>
+      <span *ngIf="(error.key === 'minlength')">Minimum 3 characters<br></span>
+      <span *ngIf="(error.key === 'mustMatch')">Passwords do not match<br></span>
+      <span *ngIf="(error.key === 'pattern')">Minimum eight characters, at least one uppercase letter, one lowercase letter,
+          one number<br></span>
+    </mat-error>
+  </div>
 </mat-form-field>

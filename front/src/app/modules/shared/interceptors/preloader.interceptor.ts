@@ -23,10 +23,12 @@ export class PreloaderInterceptor implements HttpInterceptor {
               this.toastr.warning(err.error.error.message, '', { timeOut: 3000 });
               break;
             default:
-              console.error(err.message);
+              this.toastr.warning(err.error.error.message || 'An error occurred', '', { timeOut: 3000 });
+              console.error(err);
               break;
           }
         }
+
         return throwError(err);
       }),
       finalize(() => {

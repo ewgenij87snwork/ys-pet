@@ -26,6 +26,7 @@ const routes: Routes = [
       },
       {
         path: 'create',
+        // canActivate: [AuthGuard],
         component: PostFormComponent,
       },
       {
