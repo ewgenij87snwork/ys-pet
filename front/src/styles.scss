@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "variables";
 @import "theme";
+@import "toastr";
 
 html {
   overflow-x: hidden;
@@ -31,5 +32,10 @@ p {
   cursor: pointer;
   margin-bottom: 5px;
 }
+
+#toast-container > .toast-warning {
+  background-color: #414c50;
+}
+
 
 @import "./../src/assets/styles/bootstrap.css";

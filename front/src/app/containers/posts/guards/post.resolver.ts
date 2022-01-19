@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { catchError, map, of, take } from 'rxjs';
-import { Post } from '../../modules/shared/interfaces/post.interface';
-import { PostHttpService } from '../../services/post-http/post-http.service';
+import { Post } from '../../../modules/shared/interfaces/post.interface';
+import { PostHttpService } from '../../../services/post-http/post-http.service';
 
 @Injectable({
   providedIn: 'root',

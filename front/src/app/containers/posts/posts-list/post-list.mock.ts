@@ -1,4 +1,4 @@
-import { Post } from '../../modules/shared/interfaces/post.interface';
+import { Post } from '../../../modules/shared/interfaces/post.interface';
 
 export const POSTS_LIST: Post[] = [
   {

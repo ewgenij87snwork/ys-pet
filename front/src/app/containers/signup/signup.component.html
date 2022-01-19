@@ -1,0 +1,110 @@
+<div>
+  <h2 class="has-text-centered is-size-4 mb-4">Please, signup</h2>
+  <form class="from" #signupForm="ngForm"
+        (submit)="signupForm.form.valid ? onSubmit(newUser): submitted = true">
+
+    <div class="field">
+      <div class="form-control-feedback mb-1"
+           *ngIf="name.errors && submitted === true">
+        <p *ngIf="name.errors['required']">Login is required</p>
+        <p *ngIf="name.errors['minlength']">Name length must be 5 - 9 symbol </p>
+      </div>
+      <div class="control has-icons-left has-icons-right">
+        <label>
+          <input
+            type="text"
+            class="input"
+            [class.invalid]="name.invalid && (name.dirty || name.touched)"
+            [(ngModel)]="newUser.name"
+            name="name"
+            #name="ngModel"
+            placeholder="Name"
+            required
+            minlength="5"
+            maxlength="9">
+        </label>
+        <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="form-control-feedback mb-1"
+           *ngIf="email.errors && submitted === true">
+        <p *ngIf="email.errors['required']">Email is required</p>
+        <p *ngIf="email.errors['email']">Email not correct</p>
+      </div>
+      <div class="control has-icons-left has-icons-right">
+        <label>
+          <input type="email"
+                 class="input"
+                 [class.invalid]="email.invalid && (email.dirty || email.touched)"
+                 name="email"
+                 [(ngModel)]="newUser.email"
+                 #email="ngModel"
+                 required
+                 ngvemail
+                 placeholder="Email">
+        </label>
+        <span class="icon is-small is-left">
+              <i class="fas fa-envelope"></i>
+            </span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="form-control-feedback mb-1"
+           *ngIf="pass.errors && submitted === true">
+        <p *ngIf="pass.errors['required']">Password is required</p>
+        <p *ngIf="pass.errors['pattern']">Minimum eight characters, at least one uppercase letter, one lowercase letter,
+          one number
+        </p>
+      </div>
+      <div class="control has-icons-left has-icons-right">
+        <label>
+          <input
+            class="input"
+            type="password"
+            [class.invalid]="pass.invalid && (pass.dirty || pass.touched)"
+            [(ngModel)]="newUser.pass"
+            name="pass"
+            #pass="ngModel"
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$"
+            placeholder="Password">
+        </label>
+        <span class="icon is-small is-left">
+          <i class="fas fa-key"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="form-control-feedback mb-1"
+           *ngIf="pass.value !== confirmPass.value && submitted == true">
+        <p>Passwords is not equal</p>
+      </div>
+      <div class="control has-icons-left has-icons-right">
+        <label>
+          <input
+            type="password"
+            class="input"
+            [(ngModel)]="confirmPassword"
+            #confirmPass="ngModel"
+            [class.invalid]="(confirmPass.dirty || confirmPass.touched) && pass.value !== confirmPass.value"
+            name="confirmPass"
+            placeholder="Repeat Password"
+            required>
+        </label>
+        <span class="icon is-small is-left">
+          <i class="fas fa-key"></i>
+        </span>
+      </div>
+    </div>
+
+    <div class="control">
+      <button (click)="signupForm.form.markAsTouched()" type="submit" class="button is-primary is-fullwidth">Signup
+      </button>
+    </div>
+  </form>
+</div>

@@ -9,5 +9,16 @@
     </button>
     <button mat-button color="white">Jack Szk.</button>
   </div>
+  <div class="navbar-end">
+    <a routerLink="/signup" routerLinkActive="has-background-light" class="navbar-item button ml-3"
+       *ngIf="!this.authService.isLogged()">Signup
+    </a>
+    <a routerLink="/login" routerLinkActive="has-background-light" class="navbar-item button ml-3"
+       *ngIf="!this.authService.isLogged()">Login
+    </a>
+    <a (click)="onLogout()" routerLinkActive="has-background-light" class="navbar-item button ml-3"
+       *ngIf="this.authService.isLogged()">Logout
+    </a>
+  </div>
 </mat-toolbar>
 <mat-progress-bar *ngIf="preloader.isVisible" mode="indeterminate" class="preloader"></mat-progress-bar>

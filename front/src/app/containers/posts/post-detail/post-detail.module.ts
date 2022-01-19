@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../../modules/shared/shared.module';
+import { SharedModule } from '../../../modules/shared/shared.module';
 import { PostDetailComponent } from './post-detail.component';
 
 @NgModule({
