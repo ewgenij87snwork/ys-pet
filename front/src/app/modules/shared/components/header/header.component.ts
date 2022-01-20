@@ -12,6 +12,7 @@ import { PreloaderService } from '../../../../services/preloader/preloader.servi
 export class HeaderComponent implements OnInit, OnDestroy {
   private isLoggedSubjectSub: Subscription | undefined;
   public isLogged = false;
+  public name: string | null = null;
 
   constructor(public preloader: PreloaderService, public authService: AuthService, private router: Router) {}
 
@@ -21,8 +22,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.name = localStorage.getItem('userName');
+
     this.isLoggedSubjectSub = this.authService.isLoggedSubjectStream$.subscribe(isLogged => {
-      this.isLogged = isLogged;
+      if (isLogged) {
+        this.isLogged = isLogged;
+      }
     });
   }
 

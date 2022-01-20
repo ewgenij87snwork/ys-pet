@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  private isLoggedSubject = new Subject<boolean>();
+  public isLoggedSubject = new Subject<boolean>();
   public isLoggedSubjectStream$ = this.isLoggedSubject.asObservable();
   private token: string | null = null;
 
@@ -25,21 +25,14 @@ export class AuthService {
     });
   }
 
-  public login(email: string, password: string): void {
-    this._loginRequest(email, password).subscribe(res => {
-      this.isLoggedSubject.next(!!res.token);
-      localStorage.setItem('token', res.token);
-      localStorage.setItem('userId', res.userId);
-      localStorage.setItem('userName', res.name);
+  public login(user: { email: any; password: any }): void {
+    this._loginRequest(user).subscribe(res => {
+      this.isLoggedSubject.next(!!res.data.token);
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('userId', res.data.userId);
+      localStorage.setItem('userName', res.data.name);
       this.router.navigate(['/']);
     });
-  }
-
-  public isLogged(): boolean {
-    // TODO сделать через сабжект
-    const token = localStorage.getItem('token');
-    console.log(token);
-    return !!token;
   }
 
   public logout(): void {
@@ -55,8 +48,8 @@ export class AuthService {
     return this.http.post('api/auth/signup', { data });
   }
 
-  private _loginRequest(email: string, password: string): Observable<any> {
-    return this.http.post('/api/auth/login', { email, password });
+  private _loginRequest(user: any): Observable<any> {
+    return this.http.post('/api/auth/login', user);
   }
 
   private _logoutRequest(userId: string): Observable<any> {

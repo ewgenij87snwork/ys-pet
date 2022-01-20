@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from '../../modules/shared/validators/must-match.validator';
 import { AuthService } from '../../services/auth/auth.service';
 
@@ -10,6 +10,8 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class SignupComponent {
   public showError = false;
+
+  public formOptions: AbstractControlOptions = { validators: MustMatch('password', 'confirmPassword') };
   public signupForm: FormGroup = this.fb.group(
     {
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
@@ -17,9 +19,7 @@ export class SignupComponent {
       password: ['', [Validators.required, Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$')]],
       confirmPassword: ['', [Validators.required]],
     },
-    {
-      validator: MustMatch('password', 'confirmPassword'),
-    },
+    this.formOptions,
   );
 
   public errorMessage: any;

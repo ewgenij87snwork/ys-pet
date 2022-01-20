@@ -7,19 +7,20 @@
     <button mat-button color="white" aria-label="All Posts" [routerLink]="'/'">
       All Posts
     </button>
-    <button mat-button color="white">Jack Szk.</button>
   </div>
   <div class="navbar-end">
+    <span class="fw-bold">{{ name }}</span>
+
     <button mat-button color="white" routerLink="/signup" routerLinkActive="has-background-light"
             class="navbar-item button ml-3"
-            *ngIf="!this.authService.isLogged()">Signup
+            *ngIf="!isLogged">Signup
     </button>
     <button mat-button color="white" routerLink="/login" routerLinkActive="has-background-light"
             class="navbar-item button ml-3"
-            *ngIf="!this.authService.isLogged()">Login
+            *ngIf="!isLogged">Login
     </button>
     <button mat-button color="white" (click)="onLogout()"
-            *ngIf="this.authService.isLogged()">Logout
+            *ngIf="isLogged">Logout
     </button>
   </div>
 </mat-toolbar>

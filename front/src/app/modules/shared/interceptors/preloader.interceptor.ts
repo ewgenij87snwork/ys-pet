@@ -20,7 +20,9 @@ export class PreloaderInterceptor implements HttpInterceptor {
               this.router.navigate(['/404']);
               break;
             case 500:
-              this.toastr.warning(err.error.error.message, '', { timeOut: 3000 });
+              this.toastr.warning(err.error.error.message || err.error.error || 'An error occurred', '', {
+                timeOut: 3000,
+              });
               break;
             default:
               this.toastr.warning(err.error.error.message || 'An error occurred', '', { timeOut: 3000 });

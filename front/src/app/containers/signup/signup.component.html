@@ -1,6 +1,6 @@
 <app-page-title [title]="'Signup'"></app-page-title>
-<div class="container d-flex justify-content-center">
-  <form class="form w-50" [formGroup]="signupForm">
+<div class="container signup d-flex justify-content-center">
+  <form class="form" [formGroup]="signupForm">
     <app-form-input
       [value]="getControl('name').value"
       [label]="'Name:'"
