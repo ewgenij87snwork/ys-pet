@@ -22,16 +22,20 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.name = localStorage.getItem('userName');
-
     this.isLoggedSubjectSub = this.authService.isLoggedSubjectStream$.subscribe(isLogged => {
       if (isLogged) {
+        setTimeout(() => {
+          this.name = localStorage.getItem('userName');
+        }, 1);
+        console.log(isLogged);
         this.isLogged = isLogged;
       }
     });
   }
 
   public onLogout(): void {
+    this.isLogged = false;
+    this.name = null;
     this.authService.logout();
     this.router.navigate(['/login']);
   }

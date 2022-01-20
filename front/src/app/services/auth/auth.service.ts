@@ -1,27 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  public isLoggedSubject = new Subject<boolean>();
+  public isLoggedSubject = new BehaviorSubject<boolean>(false);
   public isLoggedSubjectStream$ = this.isLoggedSubject.asObservable();
   private token: string | null = null;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private toastr: ToastrService) {}
 
   public signup(data: any): void {
     this._signupRequest(data).subscribe(_ => {
-      // TODO поменять на фолс, когда считаем на странице Логина
-      this.router.navigate(['login'], {
-        queryParams: {
-          loginAfterSignup: true,
-        },
-        queryParamsHandling: 'merge',
-      });
+      this.toastr.success('Register successful. Now you can Login', '', { timeOut: 3000 });
+      this.router.navigate(['login']);
     });
   }
 
@@ -37,11 +33,12 @@ export class AuthService {
 
   public logout(): void {
     const userId = localStorage.getItem('userId');
+    this.isLoggedSubject.next(false);
+    localStorage.clear();
+
     if (userId) {
       this._logoutRequest(userId).subscribe();
     }
-    this.isLoggedSubject.next(false);
-    localStorage.clear();
   }
 
   private _signupRequest(data: any): Observable<any> {

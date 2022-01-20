@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token') !== undefined) {
+    if (localStorage.getItem('token') !== null) {
       setTimeout(() => {
         this.authService.isLoggedSubject.next(true);
       }, 1);

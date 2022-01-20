@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './modules/shared/components/page-not-found/page-not-found.component';
+import { AuthGuard } from './modules/shared/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -10,6 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'posts',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./containers/posts/posts.module').then(m => m.PostsModule),
   },
   {
