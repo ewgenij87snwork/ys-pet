@@ -1,0 +1,22 @@
+<app-page-title [title]="'Login'"></app-page-title>
+<div class="container login d-flex justify-content-center">
+  <form class="form" [formGroup]="loginForm">
+    <app-form-input
+      [value]="getControl('email').value"
+      [label]="'Email:'"
+      [showError]="showError"
+      [inputFormControl]="getControl('email')"
+      (pressedEnter)="onLogin()"
+    ></app-form-input>
+    <app-form-input
+      [label]="'Password:'"
+      [value]="getControl('password').value"
+      [showError]="showError"
+      [inputFormControl]="getControl('password')"
+      (pressedEnter)="onLogin()"
+    ></app-form-input>
+    <div class="float-end">
+      <button mat-raised-button color="primary" class="w25" (click)="onLogin()">Login</button>
+    </div>
+  </form>
+</div>

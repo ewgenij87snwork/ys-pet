@@ -41,7 +41,8 @@
               "src/assets/styles/bootstrap.css",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles/_theme.scss",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
