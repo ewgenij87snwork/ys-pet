@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { PostHttpService } from './post-http.service';
@@ -6,7 +7,9 @@ describe('PostHttpService', () => {
   let service: PostHttpService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+    });
     service = TestBed.inject(PostHttpService);
   });
 
