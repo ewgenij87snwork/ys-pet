@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PostHttpService } from '../../../../services/post-http/post-http.service';
 
 import { LikesComponent } from './likes.component';
 
@@ -8,9 +10,10 @@ describe('LikesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [LikesComponent],
-    })
-      .compileComponents();
+      providers: [PostHttpService],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,0 +1,17 @@
+.signup {
+  width: 350px;
+
+  .from {
+    max-width: 350px;
+  }
+
+  .invalid {
+    border: 1px solid red;
+  }
+
+  .form-control-feedback {
+    color: red;
+    opacity: .4;
+  }
+
+}
