@@ -1,7 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { AuthService } from '../../../../services/auth/auth.service';
+import { Component, OnInit } from '@angular/core';
 import { PreloaderService } from '../../../../services/preloader/preloader.service';
 
 @Component({
@@ -9,25 +6,8 @@ import { PreloaderService } from '../../../../services/preloader/preloader.servi
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-  private isLoggedSubjectSub: Subscription | undefined;
-  public isLogged = false;
+export class HeaderComponent implements OnInit {
+  constructor(public preloader: PreloaderService) {}
 
-  constructor(public preloader: PreloaderService, public authService: AuthService, private router: Router) {}
-
-  ngOnDestroy() {
-    this.isLoggedSubjectSub?.unsubscribe();
-    this.isLoggedSubjectSub = undefined;
-  }
-
-  ngOnInit(): void {
-    this.isLoggedSubjectSub = this.authService.isLoggedSubjectStream$.subscribe(isLogged => {
-      this.isLogged = isLogged;
-    });
-  }
-
-  public onLogout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
+  ngOnInit(): void {}
 }

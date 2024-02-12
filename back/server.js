@@ -1,81 +1,38 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser')
+const { seed } = require('./services/seeder/seeder.js')
 
-const seederService = require('./services/seeder.service.js');
-const { name: projectName } = require('./package.json');
+mongoose.connect('mongodb://localhost:27017/ys-blog')
+  .then(() => console.log('DB connection successfully'))
+  .catch((err) => console.error(err));
 
-const { initLoggerWithContext } = require('./utils/logger');
-const { injectRequestId } = require('./middleware');
+const app = express();
+const port = 3000;
+const apiRouter = require('./api/api');
 
-const cookieParser = require('cookie-parser'),
-  log = require('morgan'),
-  cors = require('cors'),
-  multer = require('multer'),
-  dotEnv = require('dotenv'),
-  upload = multer(),
-  app = express(),
-  PORT = process.env.PORT || 3000,
-  NODE_ENV = process.env.NODE_ENV || 'development';
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }))
 
-(async () => {
-  app.set('port', PORT);
-  app.set('env', NODE_ENV);
+app.use(express.static('../front/dist/ys-pet'));
 
-  dotEnv.config();
+app.use('/api', apiRouter);
 
-  mongoose
-    .connect(process.env.MONGO_URL)
-    .then(() => console.log('DB connection successfully'))
-    .catch(err => console.error(err));
+// seed();
 
-  app.use(cors());
-  app.use(log('tiny'));
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/dist/ys-pet/index.html');
+});
 
-  // parse application/json
-  app.use(express.json());
+app.get('*', (req, res) => {
+  res.status(404).json({ message: 'Not found' });
+});
 
-  // parse raw text
-  app.use(express.text());
+// noinspection JSUnusedLocalSymbols
+app.use((err, req, res, next) => {
+  res.status(500).json({ message: err.message });
+});
 
-  // parse application/x-www-form-urlencoded
-  app.use(express.urlencoded({ extended: true }));
-  app.use(cookieParser());
-
-  // parse multipart/form-data
-  app.use(upload.array());
-
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true }));
-
-  app.use(express.static('../front/dist/ys-pet'));
-
-  app.use(injectRequestId(projectName));
-
-  app.use((req, res, next) => {
-    req.logger = initLoggerWithContext({ requestId: req.requestId });
-    next();
-  });
-
-  // await seederService.seed();
-
-  require('./routes')(app);
-
-  app.get('*', (req, res) => {
-    res.status(404).json({ status: 404, error: 'Not found.' });
-  });
-
-  // catch errors
-  app.use((error, req, res, next) => {
-    const status = error.status || 500;
-    const msg = error.error || error.message;
-    console.error(error);
-    res.status(status).send({ status, error: msg });
-  });
-
-  module.exports = app;
-
-  app.listen(PORT, () => {
-    console.log(`Express Server started on Port ${app.get('port')} | Environment : ${app.get('env')}`);
-  });
-})();
+app.listen(port, () => {
+  console.log(`Server start on http://localhost:${ port }`);
+});

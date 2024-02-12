@@ -2,48 +2,47 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const PostsSchema = new Schema(
-  {
+const PostsSchema = new Schema({
     title: {
       type: String,
-      required: [true, 'Title required'],
+      required: [true, 'Title required']
     },
 
     subtitle: {
       type: String,
-      required: [true, 'Subtitle required'],
     },
 
     text: {
       type: String,
-      required: [true, 'Text required'],
+      required: [true, 'Text required']
     },
 
     author: {
       type: Schema.Types.ObjectId,
       required: [true, 'Author required'],
-      ref: 'Users',
+      rel: 'Users'
     },
 
     tags: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Tags',
-      },
+        rel: 'Tags'
+      }
     ],
 
     likes: {
-      type: Number,
+      type: Number
     },
 
     updatedAt: {
-      type: Date,
-    },
+      type: Date
+    }
   },
 
   {
     timestamps: true,
-  },
-);
+  }
+)
 
-module.exports = mongoose.model('Posts', PostsSchema);
+const Posts = mongoose.model('Posts', PostsSchema);
+module.exports = { Posts };

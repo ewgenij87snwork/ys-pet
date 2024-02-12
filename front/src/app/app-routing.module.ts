@@ -5,20 +5,12 @@ import { PageNotFoundComponent } from './modules/shared/components/page-not-foun
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/posts',
     pathMatch: 'full',
   },
   {
     path: 'posts',
-    loadChildren: () => import('./containers/posts/posts.module').then(m => m.PostsModule),
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./containers/login/login.module').then(m => m.LoginModule),
-  },
-  {
-    path: 'signup',
-    loadChildren: () => import('./containers/signup/signup.module').then(m => m.SignupModule),
+    loadChildren: () => import('./posts/posts.module').then(m => m.PostsModule),
   },
   {
     path: '404',

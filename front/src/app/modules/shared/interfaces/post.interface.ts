@@ -1,18 +1,11 @@
 export interface Post {
-  id: string;
+  id: number;
   title: string;
   subtitle: string;
   text: string;
   author: string;
   avatar?: string;
-  likes?: number;
+  likes: number;
   date: string;
   tags?: string[];
-}
-
-export interface PostRequest {
-  title: string;
-  subtitle: string;
-  text: string;
-  author?: string;
 }
