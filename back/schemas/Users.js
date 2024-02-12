@@ -19,15 +19,16 @@ const UsersSchema = new Schema({
   password: {
     type: String,
     require: [true, 'Password is required'],
-    minlength: [6, 'Min 6 characters']
+    minlength: [6, 'Min 6 characters'],
   },
 
   avatar: {
     type: String,
-    default: 'self_improvement'
-  }
-})
+    default: 'self_improvement',
+  },
+  token: {
+    type: String,
+  },
+});
 
-const Users = mongoose.model('Users', UsersSchema);
-module.exports = { Users };
-
+module.exports = mongoose.model('Users', UsersSchema);

@@ -1,0 +1,28 @@
+<div>adsflkj;df;ldfa
+  <h2 class="has-text-centered is-size-4 mb-4">Please, login</h2>
+  <form (submit)="onLogin()">
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <label>
+          <input class="input" type="text" [(ngModel)]="email" name="login" placeholder="Login">
+        </label>
+        <span class="icon is-small is-left">
+          <i class="fas fa-user"></i>
+        </span>
+      </div>
+    </div>
+    <div class="field">
+      <div class="control has-icons-left has-icons-right">
+        <label>
+          <input class="input" [(ngModel)]="password" name="password" type="password" placeholder="Password">
+        </label>
+        <span class="icon is-small is-left">
+      <i class="fas fa-key"></i>
+    </span>
+      </div>
+    </div>
+    <div class="control">
+      <button type="submit" class="button is-primary is-fullwidth">Login</button>
+    </div>
+  </form>
+</div>
