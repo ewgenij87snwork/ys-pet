@@ -48,4 +48,3 @@ Thumbs.db
 
 dist/
 .angular/
-back/.env

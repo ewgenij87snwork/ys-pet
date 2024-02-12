@@ -38,7 +38,6 @@ export class FormInputComponent implements ControlValueAccessor, OnInit, OnChang
   @Input() placeholder = '';
   @Input() inputFormControl: FormControl = new FormControl(this.value);
   @Input() type: 'textarea' | 'input' = 'input';
-  @Input() showError = false;
 
   @Output() inputChange = new EventEmitter();
   @Output() pressedEnter = new EventEmitter();

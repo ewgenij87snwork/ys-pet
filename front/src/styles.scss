@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "variables";
 @import "theme";
-@import "toastr";
 
 html {
   overflow-x: hidden;
@@ -25,17 +24,5 @@ p {
 .mat-card-subtitle {
   line-height: 1.44;
 }
-
-.tag {
-  font-size: 0.8rem;
-  font-weight: normal;
-  cursor: pointer;
-  margin-bottom: 5px;
-}
-
-#toast-container > .toast-warning {
-  background-color: #414c50;
-}
-
 
 @import "./../src/assets/styles/bootstrap.css";

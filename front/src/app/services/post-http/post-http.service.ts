@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { PostRequest } from '../../modules/shared/interfaces/post.interface';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +8,8 @@ import { PostRequest } from '../../modules/shared/interfaces/post.interface';
 export class PostHttpService {
   constructor(private _http: HttpClient) {}
 
-  public updateLikes(postId: string, userId: string): Observable<any> {
-    return this._updateLikesRequest(postId, userId);
+  public updateLikes(postId: number, like?: boolean): Observable<any> {
+    return this._updateLikesRequest(postId, like);
   }
 
   public getPosts(): Observable<any> {
@@ -21,24 +20,9 @@ export class PostHttpService {
     return this._getErrorRequest();
   }
 
-  public getPost(postId: string): Observable<any> {
-    return this._getPostRequest(postId);
-  }
-
-  public getPostsByTag(tag: string): Observable<any> {
-    return this._getPostsByTagRequest(tag);
-  }
-
-  public createPost(post: PostRequest): Observable<any> {
-    return this._createPostRequest(post);
-  }
-
-  public updatePost(postId: string, post: PostRequest): Observable<any> {
-    return this._updatePostRequest(postId, post);
-  }
-
-  private _updateLikesRequest(postId: string, userId: string): Observable<any> {
-    return this._http.put('api/likes', { postId, userId });
+  private _updateLikesRequest(postId: number, like?: boolean): Observable<any> {
+    return of(1);
+    // return this._http.post(`/posts/${postId}/likes`, like);
   }
 
   private _getPostsRequest(): Observable<any> {
@@ -47,21 +31,5 @@ export class PostHttpService {
 
   private _getErrorRequest(): Observable<any> {
     return this._http.get('api/error');
-  }
-
-  private _getPostRequest(postId: string): Observable<any> {
-    return this._http.get(`api/posts/${postId}`);
-  }
-
-  private _getPostsByTagRequest(tag: string): Observable<any> {
-    return this._http.get(`api/posts/filter/`, { params: { tag } });
-  }
-
-  private _createPostRequest(post: PostRequest): Observable<any> {
-    return this._http.post('api/posts', post);
-  }
-
-  private _updatePostRequest(postId: string, post: PostRequest): Observable<any> {
-    return this._http.patch(`api/posts/${postId}`, post);
   }
 }
